@@ -1,0 +1,3 @@
+plugins {
+    id 'scalatest-junit-runner-gradle-example.scala-app-conventions'
+}

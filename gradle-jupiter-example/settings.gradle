@@ -1,0 +1,3 @@
+
+rootProject.name = "scalatest-junit-runner-gradle-example"
+include('app')

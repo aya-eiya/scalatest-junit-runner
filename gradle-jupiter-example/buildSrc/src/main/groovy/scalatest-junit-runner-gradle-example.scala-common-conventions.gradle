@@ -1,0 +1,37 @@
+plugins {
+    id 'scala'
+}
+
+repositories {
+    jcenter()
+}
+
+ext {
+    scalaVersion = '2.12'
+    scalaVersionFull = "${scalaVersion}.12"
+    junitApiVersion = '5.7.0'
+    junitPlatformVersion = '1.7.0'
+    scalaTestVersion = '3.2.2'
+    libVersion = '0.1.8'
+}
+
+dependencies {
+    implementation "org.scala-lang:scala-library:${scalaVersionFull}"
+
+    testImplementation "org.scalatest:scalatest_${scalaVersion}:${scalaTestVersion}",
+                       "org.junit.jupiter:junit-jupiter-api:${junitApiVersion}"
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitApiVersion}",
+                    // "org.junit.platform:junit-platform-engine:${junitPlatformVersion}",
+                    // "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}",
+                    "co.helmethair:scalatest-junit-runner:${libVersion}"
+}
+
+tasks.named('test') {
+    useJUnitPlatform {
+        includeEngines 'scalatest'
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
+}
